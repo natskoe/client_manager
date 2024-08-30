@@ -9,8 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "vitest": "^2.0.5"
-  }
+  },
+  "description": ""
 }

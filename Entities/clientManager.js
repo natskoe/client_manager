@@ -1,4 +1,4 @@
-import { Client } from "./client"
+import { Client } from "./client.js"
 
 export class ClientManager{
     constructor(){
@@ -15,23 +15,23 @@ export class ClientManager{
     }
 
     searchClient(email){
-        const clientSearched = this.clients.reduce((i, client) =>{
-            if(client.email === email){
-                return client
-            }
-        }, null)
-        console.log('Client not found.')
+        const client = this.clients.find(client => client.email === email)
+        
+        if (client){
+            return client
+        }else{
+            console.log('Client not found.');
+            return null
+        }
     }
 
     removeClient(email){
-        this.clients.reduce((i, client) =>{
-            if(client.email === email){
-                this.clients.pop(i)
-            }
-        }, null)
-        console.log('Client not found.')
+        const index = this.clients.findIndex(client => client.email === email)
+        
+        if (index !== -1){
+            this.clients.splice(index, 1);
+        }else{
+            console.log('Client not found.');
+        }
     }
-
-
-
 }

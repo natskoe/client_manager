@@ -13,19 +13,26 @@ describe('Tests from class ClientManager', () =>{
 
     it('Method delete should to delete a client by email.', () =>{
         const clients = new ClientManager();
+
         const client = new Client();
         client.createClient('bruno@gmail.com','1234','Bruno');
+
         const client2 = new Client();
-        client.createClient('paulo@gmail.com','1234','Paulo');
+        client2.createClient('paulo@gmail.com','1234','Paulo');
+
         clients.addClient(client)
         clients.addClient(client2)
-        clients.removeClient(client.email) 
-
+        
+        expect(clients.clients).toContain(client)
         expect(clients.clients).toContain(client2)
-        expect(clients.len).toBe(1)
+
+        clients.removeClient(client.email)
+        expect(clients.clients).toContain(client2)
+        
+        
     })
 
-    it.skip('Method get should search an client by email.', () =>{
+    it('Method get should search an client by email.', () =>{
         const clients = new ClientManager();
         const client = new Client();
         client.createClient('bruno@gmail.com','1234','Bruno');
@@ -33,6 +40,14 @@ describe('Tests from class ClientManager', () =>{
         const clientSearched = clients.searchClient(client.email)
 
         expect(clientSearched).toBe(client)
+
+    })
+
+    it('Method get cant return an client by an email absent.', () =>{
+        const clients = new ClientManager();
+        const clientSearched = clients.searchClient("email@gmail.com")
+
+        expect(clientSearched).toBeNull()
 
     })
 
